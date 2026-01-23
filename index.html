@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Used Car Crawler</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚗 Used Car Crawler</h1>
+            <p>Find your perfect used SUV with our intelligent search tool</p>
+        </header>
+
+        <div class="search-form">
+            <h2>Search Criteria</h2>
+            <form id="carSearchForm">
+                <div class="form-group">
+                    <label for="maxPrice">Maximum Price ($)</label>
+                    <input type="number" id="maxPrice" name="maxPrice" min="0" step="1000" placeholder="e.g., 25000" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="suvType">SUV Type</label>
+                    <select id="suvType" name="suvType" required>
+                        <option value="any" selected>Any SUV Type</option>
+                        <option value="compact">Compact SUV</option>
+                        <option value="midsize">Midsize SUV</option>
+                        <option value="fullsize">Full-size SUV</option>
+                        <option value="luxury">Luxury SUV</option>
+                        <option value="crossover">Crossover</option>
+                        <option value="any">Any SUV Type</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="minYear">Minimum Year</label>
+                    <input type="number" id="minYear" name="minYear" min="1990" max="2024" placeholder="e.g., 2018" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="maxMileage">Maximum Mileage</label>
+                    <input type="number" id="maxMileage" name="maxMileage" min="0" step="1000" placeholder="e.g., 50000" required>
+                </div>
+
+                <button type="submit" id="searchBtn">
+                    <span class="btn-text">Search Cars</span>
+                    <span class="loading-spinner" style="display: none;">🔄</span>
+                </button>
+            </form>
+        </div>
+
+        <div class="results-section" id="resultsSection" style="display: none;">
+            <h2>Search Results</h2>
+            <div class="results-stats" id="resultsStats"></div>
+            <div class="results-container" id="resultsContainer"></div>
+        </div>
+
+        <div class="loading" id="loadingIndicator" style="display: none;">
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <p>Searching for cars across multiple websites...</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="error-message" id="errorMessage" style="display: none;">
+            <h3>⚠️ Search Error</h3>
+            <p id="errorText"></p>
+            <button onclick="hideError()">Close</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Used Car Crawler. Educational purposes only.</p>
+    </footer>
+
+    <script src="crawler.js"></script>
+</body>
+</html>
