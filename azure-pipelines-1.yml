@@ -1,27 +1,35 @@
-# Maven
-# Build your Java project and run tests with Apache Maven.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+# Universal Windows Platform
+- task: SynopsysPolaris@1
+  inputs:
+    polarisService: 'Polaris-Satellite'
+    waitForIssues: true
+    populateChangeSetFile: false
+# Build a Universal Windows Platform project using Visual Studio.
+# Add steps that test and distribute an app, save build artifacts, and more:
+# https://aka.ms/yaml
 
 trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'x86|x64|ARM'
+  buildConfiguration: 'Release'
+  appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
 
 steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: false
-    testResultsFiles: '**/surefire-reports/TEST2-*.xml'
-    goals: 'compile'
+- task: NuGetToolInstaller@1
 
-
-- task: CmdLine@2
+- task: NuGetCommand@2
   inputs:
-      script: 'bash <(curl -s -L https://detect.synopsys.com/detect8.sh) --blackduck.url=https://partner-demo.blackduck.synopsys.com --blackduck.api.token=OTc2NmM3M2EtY2U2NS00NWFhLTk1MzYtMjVhMTg0ODRjYzkxOjBlZTk0NzE3LWYzNWEtNDY1Ni1hNGEyLWY1MWI5NWU5NmIxYg== --detect.project.name=hello-java --detect.project.version.name=3 --detect.impact.analysis.enabled=true --detect.impact.analysis.output.path=./abc'
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  inputs:
+    platform: 'x86'
+    solution: '$(solution)'
+    configuration: '$(buildConfiguration)'
+    msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload'
