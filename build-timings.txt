@@ -1,0 +1,33 @@
+# Version: 477d3c5ddd p-2025.9-push-57
+# Command Line: C:\blackduck\Coverity\scan\bin\cov-build --dir jose
+timer                                    ms      calls
+------------------------------------------------------
+cov-build                              5266          1
+  create_or_open emit DB                 15          1
+    get_lock                              0          1
+    open emit DB                         15          1
+  add_string_to_table                     0          5
+  addEmitFileName                         0          1
+  addEnvironmentVars                      0          1
+    add_string_to_table                   0         49
+  Prepare capture                         0          1
+  Running build command                 906          1
+  generate_generic_compiler_map         422          1
+    handle_derived_compiler              15         17
+  SecurityDA                           2282          1
+  (left over)                          1641
+
+activity                                 ms      calls
+------------------------------------------------------
+cov-build                              5266          1
+get_lock                                  0          1
+create_or_open emit DB                   15          1
+open emit DB                             15          1
+add_string_to_table                       0         54
+addEmitFileName                           0          1
+addEnvironmentVars                        0          1
+Prepare capture                           0          1
+Running build command                   906          1
+generate_generic_compiler_map           422          1
+handle_derived_compiler                  15         17
+SecurityDA                             2282          1
