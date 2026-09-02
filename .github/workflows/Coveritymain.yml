@@ -24,7 +24,7 @@ jobs:
       with:
         coverity_url: ${{ vars.COVERITY_URL }}
         coverity_user: ${{ vars.COV_USER }}
-        coverity_passphrase: ${{ vars.COVERITY_PASSPHRASE }}
+        coverity_password: ${{ vars.COVERITY_PASSPHRASE }}
         coverity_policy_view: ${{ github.event_name != 'pull_request' && 'Outstanding Issues' || '' }}
         coverity_prComment_enabled: true
         coverity_build_command: mvn -B -DskipTests package
