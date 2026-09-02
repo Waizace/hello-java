@@ -31,6 +31,6 @@ jobs:
         coverity_build_command: mvn -B -DskipTests package
         coverity_clean_command: mvn -B clean
         network_ssl_trustAll: true 
-        # coverity_local: true
+        coverity_local: true 
         github_token: ${{ secrets.GITHUB_TOKEN }}
         include_diagnostics: true 
