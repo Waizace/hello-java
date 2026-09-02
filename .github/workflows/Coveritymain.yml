@@ -23,10 +23,10 @@ jobs:
       uses: blackduck-inc/black-duck-security-scan@152247222aa9cd38124acd5c0cf60f4db71adc3f # v2.11.0
       with:
         coverity_url: ${{ vars.COVERITY_URL }}
-        coverity_user: ${{ secrets.COV_USER }}
+        coverity_user: ${{ vars.COV_USER }}
         coverity_passphrase: ${{ secrets.COVERITY_PASSPHRASE }}
         run: |
-             echo "${coverity_url}, ${coverity_user}" 
+             echo "${coverity_url}   ${coverity_user}" 
         coverity_policy_view: ${{ github.event_name != 'pull_request' && 'Outstanding Issues' || '' }}
         coverity_prComment_enabled: true
         coverity_build_command: mvn -B -DskipTests package
