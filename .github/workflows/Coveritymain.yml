@@ -25,12 +25,10 @@ jobs:
         coverity_url: ${{ vars.COVERITY_URL }}
         coverity_user: ${{ vars.COV_USER }}
         coverity_passphrase: ${{ secrets.COVERITY_PASSPHRASE }}
-        run: |
-             echo "${coverity_url}   ${coverity_user}" 
         coverity_policy_view: ${{ github.event_name != 'pull_request' && 'Outstanding Issues' || '' }}
         coverity_prComment_enabled: true
         coverity_build_command: mvn -B -DskipTests package
         coverity_clean_command: mvn -B clean
         # coverity_local: true
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        include_diagnostics: false
+        include_diagnostics: true
